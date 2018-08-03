@@ -86,8 +86,8 @@ struct Color
 
     operator float() const
     {
-        pcl::PointXYZRGB point(r, g, b);
-        return point.rgb;
+        pcl::PointXYZ point(r, g, b);
+        return 100;
     }
 
     operator std_msgs::ColorRGBA() const

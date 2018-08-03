@@ -46,7 +46,7 @@ template<typename PointT>
 void ClusteredPointCloudVisualizer::publish(const std::vector<typename pcl::PointCloud<PointT>::Ptr>& clusters, const std::string& frame_id)
 {
     if (cloud_publisher_.getNumSubscribers() == 0) return;
-    pcl::PointCloud<pcl::PointXYZRGB> composite;
+    pcl::PointCloud<pcl::PointXYZ> composite;
     size_t color = 0;
 
     for (size_t i = 0; i < clusters.size(); i++)
@@ -55,11 +55,11 @@ void ClusteredPointCloudVisualizer::publish(const std::vector<typename pcl::Poin
         for (size_t j = 0; j < cloud->points.size(); j++)
         {
             const PointT& point = cloud->points[j];
-            pcl::PointXYZRGB pt;
+            pcl::PointXYZ pt;
             pt.x = point.x;
             pt.y = point.y;
             pt.z = point.z;
-            pt.rgb = Color(color);
+            //pt.rgb = Color(color);
             composite.points.push_back(pt);
         }
         color++;

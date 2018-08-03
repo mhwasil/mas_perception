@@ -39,16 +39,16 @@ def load_classifier(classifier_name):
 
 def convert_to_xyzhsv(pc):
     # Generator for x,y,z,rgb fields from pointcloud
-    xyzrgb_gen = sensor_msgs.point_cloud2.read_points(pc, skip_nans=False, field_names=("x", "y", "z", "rgb"))
+    xyzrgb_gen = sensor_msgs.point_cloud2.read_points(pc, skip_nans=False, field_names=("x", "y", "z"))
 
     # convert generator to list of lists then numpy array
     xyzrgb = [list(elem) for elem in list(xyzrgb_gen)]
     xyzrgb = np.array(xyzrgb)
-    rgb = xyzrgb[:,3][np.newaxis].T
-    hsv = np.array([list(colorsys.rgb_to_hsv(*float_to_rgb(i))) for i in rgb])
-    xyzhsv = np.hstack([xyzrgb[:,0:3], hsv])
-
-    return xyzhsv
+    #rgb = xyzrgb[:,3][np.newaxis].T
+    #hsv = np.array([list(colorsys.rgb_to_hsv(*float_to_rgb(i))) for i in rgb])
+    #xyzhsv = np.hstack([xyzrgb[:,0:3], hsv])
+    print "SHAPEEEEEE: ", xyzrgb.shape
+    return xyzrgb
 
 if __name__ == '__main__':
     rospy.init_node(NODE)
@@ -58,7 +58,8 @@ if __name__ == '__main__':
         rospy.loginfo('Received [%s] request.' % SERVICE)
         cloud = request.cloud
         xyzhsv = convert_to_xyzhsv(cloud)
-        features = calculate_feature_vector(xyzhsv, True)
+        features = calculate_feature_vector(xyzhsv, False)
+        print "feature SHAPEEEE:", features.shape
         label, probability = classifier.classify(features)
         resp = RecognizeObjectResponse()
         resp.name = label

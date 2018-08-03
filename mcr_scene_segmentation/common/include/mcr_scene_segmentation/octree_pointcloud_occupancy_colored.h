@@ -19,7 +19,7 @@ using pcl::octree::OctreeBase;
 using pcl::octree::OctreeKey;
 
 
-template<typename PointT = pcl::PointXYZRGB, typename LeafContainerT = OctreeContainerPointIndex,
+template<typename PointT = pcl::PointXYZ, typename LeafContainerT = OctreeContainerPointIndex,
          typename BranchContainerT = OctreeContainerEmpty>
 class OctreePointCloudOccupancyColored : public OctreePointCloud<PointT, LeafContainerT, BranchContainerT,
                                                                  OctreeBase<LeafContainerT, BranchContainerT> >
@@ -39,7 +39,7 @@ public:
         adoptBoundingBoxToPoint(point);
         genOctreeKeyforPoint(point, key);
         OctreeContainerPointIndex* leaf = this->createLeaf(key);
-        leaf->addPointIndex(point.rgba);
+        //leaf->addPointIndex(point.rgba);
     }
 
     void setOccupiedVoxelsAtPointsFromCloud(const typename pcl::PointCloud<PointT>::ConstPtr& cloud)
@@ -64,7 +64,7 @@ public:
         for (size_t i = 0; i < points.size(); i++)
         {
             uint32_t color = this->getVoxelColorAtPoint(points[i]);
-            points[i].rgba = color;
+            //points[i].rgba = color;
         }
     }
 };

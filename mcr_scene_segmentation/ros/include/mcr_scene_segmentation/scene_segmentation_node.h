@@ -58,9 +58,10 @@ class SceneSegmentationNode
         int object_id_;
         double octree_resolution_;
         double object_height_above_workspace_;
-        bool is_classifier_required_;
         bool dataset_collection_;
-        bool debug_mode_;        
+        bool debug_mode_;
+        std::string pcd_file_path_;
+        std::string pcd_file_name_;        
 
     private:
         void pointcloudCallback(const sensor_msgs::PointCloud2::Ptr &msg);

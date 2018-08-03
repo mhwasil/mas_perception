@@ -14,7 +14,7 @@
 #include <pcl/geometry/planar_polygon.h>
 #include <pcl/segmentation/planar_region.h>
 
-typedef pcl::PointXYZRGB PointT;
+typedef pcl::PointXYZ PointT;
 typedef pcl::Normal PointNT;
 typedef pcl::Label PointLT;
 

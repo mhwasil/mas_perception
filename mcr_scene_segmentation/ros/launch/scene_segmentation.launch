@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="input_pointcloud_topic" default="/arm_cam3d/depth_registered/points" />
+  <arg name="input_pointcloud_topic" default="/royale_camera_driver/point_cloud" />
   <arg name="target_frame" default="base_link" />
   <arg name="scene_segmentation_config_file" default="$(find mcr_scene_segmentation)/ros/config/scene_segmentation_constraints.yaml" />
 
@@ -11,9 +11,9 @@
       <remap from="~input" to="$(arg input_pointcloud_topic)" />
       <remap from="~object_list" to="/mcr_perception/object_detector/object_list"/>
       <param name="target_frame_id" value="$(arg target_frame)" type="str" />
-      <param name="is_classifier_required" value="false" />
-      <param name="dataset_collection" value="false" />
-      <param name="debug_mode" value="true" /> 
+      <param name="debug_mode" value="true" />
+      <param name="pcd_file_path" value="/tmp" type="str" />
+      <param name="pcd_file_name" value="atwork_object" type="str" />
     </node>
   </group>
 
