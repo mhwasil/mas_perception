@@ -7,4 +7,4 @@ services:
     image: bitbots/bitbots-perception:${TRAVIS_COMMIT}
   perception:
     build: .
-    image: bitbots/bitbots-perception:kinetic
+    image: bitbots/bitbots-perception:melodic
